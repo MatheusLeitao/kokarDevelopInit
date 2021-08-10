@@ -79,13 +79,11 @@ Não fora possível botar ambos as branchs para funcionar com o GitHubActions, p
 # Dicionário
 
 ### Git Flow
-```
-[bugfix]: São bugs que podem ser encontrados pela unidade de teste ao decorrer do desenvolvimento que não precisam ser lançado de imediato, pois, não alteram o funcionamento da aplicação em produção.
+>[bugfix]: São bugs que podem ser encontrados pela unidade de teste ao decorrer do desenvolvimento que não precisam ser lançado de imediato, pois, não alteram o funcionamento da aplicação em produção.
 
-[hotfix]: São bugs encontrados por usuários e, impactam diretamente o uso da aplicação, portanto, deve ter a mais extrema urgência para consertar.
+>[hotfix]: São bugs encontrados por usuários e, impactam diretamente o uso da aplicação, portanto, deve ter a mais extrema urgência para consertar.
 
-[feature]: São novas funcionalidades que serão adicionada ao sistema. (Na kokar devemos separar projeto de feature, as features são melhorias do sistema ou, apêndices de um sistema já em produção. Ex: A alexa voice command já está em uso, uma feature seria separar o comando do ar-condicionado para ir direto para o ar.)
-```
+>[feature]: São novas funcionalidades que serão adicionada ao sistema. (Na kokar devemos separar projeto de feature, as features são melhorias do sistema ou, apêndices de um sistema já em produção. Ex: A alexa voice command já está em uso, uma feature seria separar o comando do ar-condicionado para ir direto para o ar.)
 
 Imagens retiradas de:
 [Figma](https://www.figma.com/file/3tmODjkqTgFP72x74sYuxf/Kokar-Pipeline?node-id=0%3A1)
