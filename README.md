@@ -71,8 +71,10 @@ O [Git Actions](https://docs.github.com/en/actions/quickstart) é uma ferramenta
 **Diagrama de sequencia:**<br/>
 ![Diagrama de sequencia](https://github.com/MatheusLeitao/kokarDevelopInit/blob/master/sequence_diagram_actions.jpeg?raw=true)
 ##### *(Imagens necessitam atualizações.)*
+<br>
 
-
+#### Explanação
+Não fora possível botar ambos as branchs para funcionar com o GitHubActions pois, não tem como priorizar os [runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) de acordo com a branch. Segundo a [documentação](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners#communication-between-self-hosted-runners-and-github), ao executar um [job](https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions#the-components-of-github-actions), a queue seleciona o primeiro runner conectado, não há formas de priorizar.
 
 # Dicionário
 
