@@ -123,7 +123,11 @@ Para o flow que está definido agora, ao criar um projeto, **deve-se** separar a
 > * Master
 > * Develop
 
-Consequentemente, quando um projeto conter uma feature **DEVE** por obrigação subir ao menos a branch da feature para o repositório remoto, no caso o GitHub, para que outras pessoas tenham ciência do trabalho, contudo, assim que a feature for finalizada, a branch remota **pode ser removida.** Esta branch `deve ser derivada da master`, a branch mais "zerada" e que está em uso no momento.
+Consequentemente, quando um projeto conter uma feature **DEVE** por obrigação subir ao menos a branch da feature para o repositório remoto, no caso o GitHub, para que outras pessoas tenham ciência do trabalho, contudo, assim que a feature for finalizada, a branch remota **pode ser removida.**
+```diff
+- Esta branch `deve ser derivada da master`, a branch mais "zerada" e que está em uso no momento.
+```
+
 
 
 
