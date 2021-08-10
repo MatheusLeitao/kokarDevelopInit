@@ -110,9 +110,9 @@ Para o flow que está definido agora, ao criar um projeto, **deve-se** separar a
 
 #### No git:
 > Branches:
-> * ┌   Master **(Bloqueada[*¹](#*1))**
-> * ├    Develop (Reservada para uso laboratorial[*²](#*2))
-> * ├   feature/@feature-name
+> * ┌   Master **(Bloqueada[*¹](#1-o-ideal-é-que-a-master-seja-bloqueada-para-que-apenas-quando-dois-revisem-o-pull-request-seja-homologado-ao-servidor-de-produção-assim-evitando-que-pequenos-erros-passem-desapercebido))**
+> * ├    Develop (Reservada para uso laboratorial[*²](#2-servidor-laboratorial-para-uso-de-testes-onde-pode-ser-facilmente-formatado-e-descartado-onde-há-testes-de-novos-softwares-ou-instalações-de-dependencias-que-podem-alterar-o-funcionamento-do-sistema))
+> * └    feature/@feature-name
 >   * ├ fix/@feature-name
 >   * └ bugfix/@feature-name
 
@@ -120,18 +120,25 @@ Para o flow que está definido agora, ao criar um projeto, **deve-se** separar a
 
 #### **Nota-se que, em teu repositório **DEVEM** ter ao menos essa estrutura:**
 
-> * Master
+> * Master/Main
 > * Develop
 
-Consequentemente, quando um projeto conter uma feature **DEVE** por obrigação subir ao menos a branch da feature para o repositório remoto, no caso o GitHub, para que outras pessoas tenham ciência do trabalho, contudo, assim que a feature for finalizada, a branch remota **pode ser removida.**
-```diff
-- Esta branch `deve ser derivada da master`, a branch mais "zerada" e que está em uso no momento.
-```
+Consequentemente, quando um projeto conter uma feature **DEVE** por obrigação subir ao menos a branch da feature para o repositório remoto, no caso o GitHub, para que outras pessoas tenham ciência do trabalho, contudo, assim que a feature for finalizada, a branch remota **pode ser removida.**. **Importante, esta branch `deve ser derivada da master`, a branch mais "zerada" e que está em uso no momento.**
+<br>
+<br>
+Referete as tags, fix e bugfix, podem ser mantidas em repositórios locais e adicioandas à branch develop. Agora, tratando-se da hotfix, ela pode ser retirada diretamente da master, porém, o ideal é que retire ela da branch feature/@feature-name e refaça todos os camihos até homologar em produção.
 
+**Para os flows, serão organizados desta forma:**<br>
 
+* Push local feature/* para a remote feature/* que você **DEVE** ter criado assim que teve a feature.
+  * merge local feature/* com local develop para que a dev contenha todas as features do seu projeto.
+    * push do local develop para remote develop para que seja buildado no servidor de development e esteja pronto para o uso.
+    * Teste no servidor de development para que seja aprovado a homologação ou reprovado.
+      * Caso aprovado, será criado um [pull request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) e analisado para aprovação.
+      * Caso reprovado, deverá voltar para o início da [pipeline](#pipeline).
 
-
-Referete as tags, fix e bugfix, podem ser mantidas em repositórios locais e adicioandas à branch develop. Agora, tratando
+Segue imagens para exemplificação.
+![workflow](https://github.com/MatheusLeitao/kokarDevelopInit/blob/master/kokar_workflow.jpeg?raw=true)
 
 <br>
 
@@ -141,3 +148,5 @@ Referete as tags, fix e bugfix, podem ser mantidas em repositórios locais e adi
 <br>
 
 
+Imagens retiradas de:
+[Figma](https://www.figma.com/file/3tmODjkqTgFP72x74sYuxf/Kokar-Pipeline?node-id=0%3A1)
