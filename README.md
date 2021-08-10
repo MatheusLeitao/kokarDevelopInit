@@ -1,4 +1,4 @@
-# Kokar Development Init!
+# Kokar Development Init
 
 Kit para que inicialização de um novo projeto seja facilitada dentro da empresa. Fora definido no dia 09/08/2021, todos os projetos, **se possível**, tenham um ambiente para testes antes da homologação.
 
@@ -78,13 +78,62 @@ Não fora possível botar ambos as branchs para funcionar com o GitHubActions, p
 
 # Dicionário
 
-### Git Flow
+## Git Flow
+
+Antes de adentrarmos mais a fundo do que será tratado em nosso git flow (quando digo nosso, digo pelo motivo de adaptarmos o ['git flow workflow'](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) à realidade da empresa.), devemos ter em mente alguns conceitos:
+
 >[bugfix]: São bugs que podem ser encontrados pela unidade de teste ao decorrer do desenvolvimento que não precisam ser lançado de imediato, pois, não alteram o funcionamento da aplicação em produção.
 
 >[hotfix]: São bugs encontrados por usuários e, impactam diretamente o uso da aplicação, portanto, deve ter a mais extrema urgência para consertar.
 
 >[feature]: São novas funcionalidades que serão adicionada ao sistema. (Na kokar devemos separar projeto de feature, as features são melhorias do sistema ou, apêndices de um sistema já em produção. Ex: A alexa voice command já está em uso, uma feature seria separar o comando do ar-condicionado para ir direto para o ar.)
 
-Imagens retiradas de:
-[Figma](https://www.figma.com/file/3tmODjkqTgFP72x74sYuxf/Kokar-Pipeline?node-id=0%3A1)
+>[fix]: Esta é a tag que mais usaremos em nossos projetos, está relacionado diretamente com as pequenas mudanças que se faz em um código, **dentro de uma feature** que está em desenvolvimento ou já fora lançada, como uma mudança da cor do botão, layouts, adições ou remoçoes de inputs, etc...
+
+As tags do git flow **DEVEM** ser adicionadas no ínicio de todas as branchs para os projetos. <br>
+Exs:
+
+* Será adicionado uma melhoria no app, uma função de adicionar conexão via bluetooth:
+  * feature/bluetooth
+* Adicionar dois botões diferentes para conectar o bluetooth
+  * fix/bluetooth-botao
+* Nos testes, foi verificado que primeiro botão ta demorando muito para abrir um modal
+  * bugfix/bluetooth-botao
+* Um cliente avisou que o botão de conenctar o bluetooth não está funcionando.
+  * hotfix/bluetooth-botão **(Este é urgente, deve ser corrigido e lançado à master.)**
+
+
+
+### kokar flow
+
+Para o flow que está definido agora, ao criar um projeto, **deve-se** separar a master/main da develop para que seja possível a separação e criação de ambientes de desenvolvimento. Portanto, o fluxo deve ser mais ou menos assim.
+
+#### No git:
+> Branches:
+> * ┌   Master **(Bloqueada[*¹](#*1))**
+> * ├    Develop (Reservada para uso laboratorial[*²](#*2))
+> * ├   feature/@feature-name
+>   * ├ fix/@feature-name
+>   * └ bugfix/@feature-name
+
+> hotfix/@feature-name - feature-name a qual o problema reside.
+
+#### **Nota-se que, em teu repositório **DEVEM** ter ao menos essa estrutura:**
+
+> * Master
+> * Develop
+
+Consequentemente, quando um projeto conter uma feature **DEVE** por obrigação subir ao menos a branch da feature para o repositório remoto, no caso o GitHub, para que outras pessoas tenham ciência do trabalho, contudo, assim que a feature for finalizada, a branch remota **pode ser removida.** Esta branch `deve ser derivada da master`, a branch mais "zerada" e que está em uso no momento.
+
+
+
+Referete as tags, fix e bugfix, podem ser mantidas em repositórios locais e adicioandas à branch develop. Agora, tratando
+
+<br>
+
+##### *1: O ideal é que a master seja bloqueada para que, apenas quando dois revisem o pull request seja homologado ao servidor de produção, assim, evitando que pequenos erros passem desapercebido.
+##### *2: servidor Laboratorial para uso de testes, onde pode ser facilmente formatado e descartado, onde há testes de novos softwares ou instalações de dependencias que podem alterar o funcionamento do sistema.
+
+<br>
+
 
