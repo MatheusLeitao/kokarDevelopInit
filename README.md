@@ -36,7 +36,9 @@ Nesta unidade, que antecede a homologação para a produção, é reservada **AP
 Caso haja algum problema/bug nessa unidade, a change deverá voltar para o inicio do pipe.
 
 ### Produção
-Nome autoexplicativo, a ponta do pipe, é a parte que é consumida pelos "consumidores" (clientes, aplicações e etc...), a pipeline deve ser usada de forma que, as changes que chegam aqui **NÃO PODEM CONTER BUGS**, caso contenha, não pode ser retornado ao início do pipe, apenas por intermédio de [hotfix](#git-flow)
+Nome autoexplicativo, a ponta do pipe, é a parte que é consumida pelos "consumidores" (clientes, aplicações e etc...), a pipeline deve ser usada de forma que, as changes que chegam aqui **NÃO PODEM CONTER BUGS**, caso contenha, não pode ser retornado ao início do pipe, apenas por intermédio de [hotfix](#git-flow). Assim como na segunda [fase](#aplicação), todo o processo de entrega é automatizado, porém, diferentemte da segunda fase, não é utilizado webhook e sim a ferramenta do [GitActions](#gitactions).
+
+![Pipeline](https://github.com/MatheusLeitao/kokarDevelopInit/blob/master/pipeline.jpeg?raw=true)
 
 </details>
 
@@ -54,13 +56,27 @@ Na segunda fase, [build dev](#build-development), trabalharemos com o Git Webhoo
 ***Ps: Estaremos trabalhando com webhook pois, no dia de hoje, o GitActions não atende a separação de job por branch.***
 
 ## Webhook
+Ao realizarmos um push ou merge para a a branch development, o GitHub dispara um webhook que é interceptado para o serivdor, assim, é executado o script em shell que fara todas as rotínas necessárias para que o código rode.
+<br>
+<br>
+**Diagrama de sequencia:**<br/>
+![Diagrama de sequencia](https://github.com/MatheusLeitao/kokarDevelopInit/blob/master/sequence_diagram.jpeg?raw=true)
+##### *(Imagens necessitam atualizações.)*
 
-**Diagrama de sequencia:**
+
+## GitActions
+O [Git Actions](https://docs.github.com/en/actions/quickstart) é uma ferramenta disponibilizada pelo github de [CD](https://continuousdelivery.com/), como o todo já é automatizado por sí só, não há necessidade de um terceiro para a aplicação funcionar, apenas que tenha um "listener" [(runners)](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) no servidor para poder realizar os comandos.
+<br>
+<br>
+**Diagrama de sequencia:**<br/>
+![Diagrama de sequencia](https://github.com/MatheusLeitao/kokarDevelopInit/blob/master/sequence_diagram_actions.jpeg?raw=true)
+##### *(Imagens necessitam atualizações.)*
+
 
 
 # Dicionário
 
-#### Git Flow
+### Git Flow
 ```
 [bugfix]: São bugs que podem ser encontratos pela unidade de teste ao decorrer do desenvolvimento que não precisam ser lançado de imediato pois não alteram o funcionamento da aplicação em produção.
 
@@ -72,43 +88,3 @@ Na segunda fase, [build dev](#build-development), trabalharemos com o Git Webhoo
 Imagens retiradas de:
 [Figma](https://www.figma.com/file/3tmODjkqTgFP72x74sYuxf/Kokar-Pipeline?node-id=0%3A1)
 
-- The file synchronization will keep one file of the workspace synced with one or multiple files in **Google Drive**, **Dropbox** or **GitHub**.
-	> Before starting to sync files, you must link an account in the **Synchronize** sub-menu.
-
-    > **Note:** The **Synchronize now** button is disabled if you have no file to synchronize.
-
-## SmartyPants
-
-SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
-
-|                |ASCII                          |HTML                         |
-|----------------|-------------------------------|-----------------------------|
-|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
-|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
-|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
-
-
-## KaTeX
-
-You can render LaTeX mathematical expressions using [KaTeX](https://khan.github.io/KaTeX/):
-
-The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
-
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
-
-> You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
-
-
-
-```mermaid
-sequenceDiagram
-CommitUser ->> Github: Hello Github, how are you?
-Github-->>ServerDev: How about you ServerDev?
-Github--x CommitUser: I am good thanks!
-Github-x ServerDev: I am good thanks!
-Note right of ServerDev: Github thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
-
-Github-->CommitUser: Checking with ServerDev...
-CommitUser->ServerDev: Yes... John, how are you?
