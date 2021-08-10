@@ -86,11 +86,11 @@ Antes de adentrarmos mais a fundo do que será tratado em nosso git flow (quando
 
 >[hotfix]: São bugs encontrados por usuários e, impactam diretamente o uso da aplicação, portanto, deve ter a mais extrema urgência para consertar.
 
->[feature]: São novas funcionalidades que serão adicionada ao sistema. (Na kokar devemos separar projeto de feature, as features são melhorias do sistema ou, apêndices de um sistema já em produção. Ex: A alexa voice command já está em uso, uma feature seria separar o comando do ar-condicionado para ir direto para o ar.)
+>[feature]: São novas funcionalidades que serão adicionadas ao sistema. (Na kokar devemos separar projeto de feature, as features são melhorias do sistema ou, apêndices de um sistema já em produção. Ex: A alexa voice command já está em uso, uma feature seria separar o comando do ar-condicionado para ir direto para o ar.)
 
->[fix]: Esta é a tag que mais usaremos em nossos projetos, está relacionado diretamente com as pequenas mudanças que se faz em um código, **dentro de uma feature** que está em desenvolvimento ou já fora lançada, como uma mudança da cor do botão, layouts, adições ou remoçoes de inputs, etc...
+>[fix]: Esta é a tag que mais usaremos em nossos projetos, está relacionado diretamente com as pequenas mudanças que se faz em um código, **dentro de uma feature** que está em desenvolvimento ou já fora lançada, como uma mudança da cor do botão, layouts, adições ou remoções de inputs, etc...
 
-As tags do git flow **DEVEM** ser adicionadas no ínicio de todas as branchs para os projetos. <br>
+As tags do git flow **DEVEM** ser adicionadas no início de todas as branchs para os projetos. <br>
 Exs:
 
 * Será adicionado uma melhoria no app, uma função de adicionar conexão via bluetooth:
@@ -99,7 +99,7 @@ Exs:
   * fix/bluetooth-botao
 * Nos testes, foi verificado que primeiro botão ta demorando muito para abrir um modal
   * bugfix/bluetooth-botao
-* Um cliente avisou que o botão de conenctar o bluetooth não está funcionando.
+* Um cliente avisou que o botão de conectar o bluetooth não está funcionando.
   * hotfix/bluetooth-botão **(Este é urgente, deve ser corrigido e lançado à master.)**
 
 
@@ -126,7 +126,7 @@ Para o flow que está definido agora, ao criar um projeto, **deve-se** separar a
 Consequentemente, quando um projeto conter uma feature **DEVE** por obrigação subir ao menos a branch da feature para o repositório remoto, no caso o GitHub, para que outras pessoas tenham ciência do trabalho, contudo, assim que a feature for finalizada, a branch remota **pode ser removida.**. **Importante, esta branch `deve ser derivada da master`, a branch mais "zerada" e que está em uso no momento.**
 <br>
 <br>
-Referete as tags, fix e bugfix, podem ser mantidas em repositórios locais e adicioandas à branch develop. Agora, tratando-se da hotfix, ela pode ser retirada diretamente da master, porém, o ideal é que retire ela da branch feature/@feature-name e refaça todos os camihos até homologar em produção.
+Referente as tags, fix e bugfix, podem ser mantidas em repositórios locais e adicionadas à branch develop. Agora, tratando-se da hotfix, ela pode ser retirada diretamente da master, porém, o ideal é que retire ela da branch feature/@feature-name e refaça todos os caminhos até homologar em produção.
 
 **Para os flows, serão organizados desta forma:**<br>
 
