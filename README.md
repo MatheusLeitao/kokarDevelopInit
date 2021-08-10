@@ -3,7 +3,7 @@
 Kit para que inicialização de um novo projeto seja facilitada dentro da empresa. Fora definido no dia 09/08/2021, todos os projetos, **se possível**, tenham um ambiente para testes antes da homologação.
 
 ## Detalhes
-<!-- <details> -->
+<details>
  <summary>Definições</summary>
 
 ## Implantação de Ci/Cd
