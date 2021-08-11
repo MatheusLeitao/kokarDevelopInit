@@ -1,0 +1,25 @@
+{
+  "name": "webhook",
+  "version": "1.0.0",
+  "description": "Kit para que inicialização de um novo projeto seja facilitada dentro da empresa. Fora definido no dia 09/08/2021, todos os projetos, **se possível**, tenham um ambiente para testes antes da homologação.",
+  "main": "handleRequest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatheusLeitao/kokarDevelopInit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatheusLeitao/kokarDevelopInit/issues"
+  },
+  "homepage": "https://github.com/MatheusLeitao/kokarDevelopInit#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "shelljs": "^0.8.4"
+  }
+}
