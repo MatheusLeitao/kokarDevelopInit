@@ -183,7 +183,7 @@ function check_git_credentials () {
     if test -f "$FILE"; then
         if ! [[ "$(cat $FILE)" =~ "$GIT_CREDENTIAL" ]]; then
             echo ".git-credentials already exists, changing it to fit its criteria."
-            echo "https://matheusleitao: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@github.com" > ~/.git-credentials
+            echo "ca" > ~/.git-credentials
             echo "File changed."
         fi
     else
