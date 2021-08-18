@@ -10,7 +10,7 @@ function process_kill() {
 export WORK_DIR=$1
 export BRANCH=$2
 
-cd WORK_DIR
+cd ../$WORK_DIR
 
 git checkout $BRANCH
 git pull
