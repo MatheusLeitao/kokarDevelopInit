@@ -12,7 +12,7 @@ export BRANCH=$2
 
 cd WORK_DIR
 
-git branch $BRANCH
+git checkout $BRANCH
 git pull
 
 # docker container stop $(docker container ls -aq)
