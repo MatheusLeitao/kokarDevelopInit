@@ -69,7 +69,7 @@ class payloadHandler {
     }
 
     runShellCommand(command) {
-        shell.exec(command)
+        shell.exec(`cd ./${this.repository}; ${command}`)
     }
 
 
