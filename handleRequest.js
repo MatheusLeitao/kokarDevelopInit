@@ -10,7 +10,8 @@ class payloadHandler {
         this.repository = this.urlParser(this.url)[4].replace('.git', '')
         this.branchListeningList = ['dev', 'development', 'develop']
         this.branch = ''
-        this.path = `../${this.repository}/.kokar/init.yaml`
+        this.yaml = `./${this.repository}/.kokar/init.yaml`
+        this.yml = `./${this.repository}/.kokar/init.yml`
         console.log(`Listening for repo >> ${this.repository}`)
     }
 
@@ -34,7 +35,7 @@ class payloadHandler {
             let colors = { yellow:'\x1b[33m', green: '\x1b[32m', red: '\x1b[31m', reset: '\x1b[0m' }
             try{
                 console.log(`${colors.yellow}Checking for init.yaml${colors.reset}`);
-                if (fs.existsSync(this.path)){
+                if (fs.existsSync(this.yaml)){
                     console.log(`${colors.green}init.yaml found.${colors.reset}`);
 
                     let commands = this.checkCommands()
@@ -61,7 +62,7 @@ class payloadHandler {
 
     checkCommands() {
         try {
-            return yaml.load(fs.readFileSync(this.path, 'utf8'));
+            return yaml.load(fs.readFileSync(this.yaml, 'utf8'));
         } catch (e) {
             throw new Error(e)
         }

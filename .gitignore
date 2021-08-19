@@ -1,6 +1,7 @@
 # *.sh
 **test**
 kokarDevelopInit.sh
+.kokar/
 
 # Logs
 logs
