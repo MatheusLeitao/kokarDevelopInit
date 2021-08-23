@@ -6,6 +6,7 @@ const handleRequest = require('./handleRequest')
 const app = express()
 
 const parseRequestedArgument = arg => {
+    if(String(arg).match(/([-])/)) arg = arg.replace("-", "")
     if(String(arg).match(/https:\/\/github.com\/\b\w+\b\/\b\w+\b\.git/)) return true
     else return false
 }
