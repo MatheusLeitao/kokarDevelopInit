@@ -38,6 +38,8 @@ class payloadHandler {
                 if (fs.existsSync(this.yaml)){
                     console.log(`${colors.green}init.yaml found.${colors.reset}`);
 
+                    shell.exec('git checkout development')
+
                     let commands = this.checkCommands()
 
                     if (commands.run){
