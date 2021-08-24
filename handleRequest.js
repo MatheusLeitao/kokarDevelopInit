@@ -39,9 +39,9 @@ class payloadHandler {
                     console.log(`${colors.green}init.yaml found.${colors.reset}`);
 
                     console.log(`${colors.yellow}CHECKING OUT FOR "development" BRANCH${colors.reset}`)
-                    shell.exec('git checkout development')
+                    shell.exec(`cd ./${this.repository}; git checkout development`)
                     console.log(`${colors.yellow}CURRENT BRANCH BELLOW${colors.reset}`)
-                    shell.exec('git branch')
+                    shell.exec(`cd ./${this.repository}; git branch`)
 
                     let commands = this.checkCommands()
 
