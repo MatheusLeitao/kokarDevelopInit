@@ -23,11 +23,11 @@ const payloadhandler = new handleRequest.payloadHandler(requestedUrl)
 
 app.use(bodyPaser.json())
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
 
-    payloadhandler.onLoadMessage(req.body)
-
-    res.send('MEC')
+    let response = await payloadhandler.onLoadMessage(req.body)
+    res.status(response.status).send(response)
+    
 })
 
 

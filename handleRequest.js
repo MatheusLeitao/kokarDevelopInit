@@ -16,7 +16,7 @@ class payloadHandler {
     }
 
 
-    onLoadMessage(request) {
+    async onLoadMessage(request) {
 
         this.branch = request.ref.split("/")[2]
 
@@ -46,18 +46,43 @@ class payloadHandler {
                         });
                     }
 
+                    console.log(`${colors.green}Script execution finished successfully.${colors.reset}`)
+                    return { status: 200, message: "Script execution finished successfully" }
                 }else{
                     console.log(`${colors.red}Not found.${colors.reset}`)
-                    shell.exec(`pwd`)
-                    // shell.exec(`./handleServices.sh ${this.repository} ${this.branch}`)
+                    shell.exec(`./kokarDevelopInit/handleServices.sh ${this.repository} ${this.branch}`)
+                    return { status: 200, message: "Script execution finished successfully" }
                 }
             }catch(err){
-                console.log("Why here?")
                 shell.exec(`./kokarDevelopInit/handleServices.sh ${this.repository} ${this.branch}`)
+                return { status: 200, message: "Script execution finished successfully" }
             }
 
+        } else {
+            console.log("Seems it... it didn't work? hmm..🤔\nEither repository is wrong or branch is wrong..")
+
+            if(this.checkRepositoryABranch(this.branch)){
+                return {
+                    status: 415,
+                    message: "Branch doesn't match the required one",
+                    branches: {
+                        required: "development",
+                        got: this.branch
+                    }
+                }
+            }
+            if(this.checkRepositoryPayload(request.repository.name)){
+                return {
+                    status: 416,
+                    message: "Repository doesn't match the required one",
+                    repository: {
+                        required: this.repository,
+                        got: request.repository.name
+                    }
+                }
+            }
         }
-        else console.log("Seems it... it didn't work? hmm..🤔\nEither repository is wrong or branch is wrong..")
+        return { status: 400, message: "Error when initializing script."}
     }
 
     checkCommands() {
