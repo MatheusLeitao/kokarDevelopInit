@@ -13,6 +13,7 @@ class payloadHandler {
         this.yaml = `./${this.repository}/.kokar/init.yaml`
         this.yml = `./${this.repository}/.kokar/init.yml`
         console.log(`Listening for repo >> ${this.repository}`)
+        this.cd = `cd ./${this.repository};`
     }
 
 
@@ -34,14 +35,18 @@ class payloadHandler {
         if (this.checkRepositoryPayload(request.repository.name) && this.checkRepositoryABranch(this.branch)){
             let colors = { yellow:'\x1b[33m', green: '\x1b[32m', red: '\x1b[31m', reset: '\x1b[0m' }
             try{
+
                 console.log(`${colors.yellow}Checking for init.yaml${colors.reset}`);
                 if (fs.existsSync(this.yaml)){
                     console.log(`${colors.green}init.yaml found.${colors.reset}`);
 
                     console.log(`${colors.yellow}CHECKING OUT FOR "development" BRANCH${colors.reset}`)
-                    shell.exec(`cd ./${this.repository}; git checkout development`)
+                    this.runShellCommand(`git checkout development`)
                     console.log(`${colors.yellow}CURRENT BRANCH BELLOW${colors.reset}`)
-                    shell.exec(`cd ./${this.repository}; git branch`)
+                    this.runShellCommand(`git branch`)
+                    console.log(`${colors.yellow}PULLING CODE FROM REMOTE REPOSITORY${colors.reset}`)
+                    this.runShellCommand(`git pull`)
+
 
                     let commands = this.checkCommands()
 
@@ -99,7 +104,7 @@ class payloadHandler {
     }
 
     runShellCommand(command) {
-        shell.exec(`cd ./${this.repository}; ${command}`)
+        shell.exec(`${this.cd}; ${command}`)
     }
 
 
