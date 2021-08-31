@@ -13,11 +13,12 @@ class payloadHandler {
         this.yaml = `./${this.repository}/.kokar/init.yaml`
         this.yml = `./${this.repository}/.kokar/init.yml`
         console.log(`Listening for repo >> ${this.repository}`)
-        this.cd = `cd ./${this.repository};`
     }
 
 
-    async onLoadMessage(request) {
+    async onLoadMessage(req, res) {
+
+        const request = req.body
 
         this.branch = request.ref.split("/")[2]
 
@@ -47,6 +48,7 @@ class payloadHandler {
                     console.log(`${colors.yellow}PULLING CODE FROM REMOTE REPOSITORY${colors.reset}`)
                     this.runShellCommand(`git pull`)
 
+                    res.status(200).send("Script execution started successfully")
 
                     let commands = this.checkCommands()
 
@@ -57,6 +59,7 @@ class payloadHandler {
                     }
 
                     console.log(`${colors.green}Script execution finished successfully.${colors.reset}`)
+
                     return { status: 200, message: "Script execution finished successfully" }
                 }else{
                     console.log(`${colors.red}Not found.${colors.reset}`)
@@ -65,6 +68,7 @@ class payloadHandler {
                 }
             }catch(err){
                 shell.exec(`./kokarDevelopInit/handleServices.sh ${this.repository} ${this.branch}`)
+                res.status(200).send("Script execution finished successfully without yaml file.")
                 return { status: 200, message: "Script execution finished successfully" }
             }
 
@@ -72,26 +76,31 @@ class payloadHandler {
             console.log("Seems it... it didn't work? hmm..🤔\nEither repository is wrong or branch is wrong..")
 
             if(this.checkRepositoryABranch(this.branch)){
-                return {
-                    status: 415,
+                let payload = {
                     message: "Branch doesn't match the required one",
                     branches: {
                         required: "development",
                         got: this.branch
                     }
                 }
+                res.status(415).send(payload)
+                return { status: 415, payload }
             }
             if(this.checkRepositoryPayload(request.repository.name)){
-                return {
-                    status: 416,
+                let payload = {
                     message: "Repository doesn't match the required one",
                     repository: {
                         required: this.repository,
                         got: request.repository.name
                     }
                 }
+
+                res.status(416).send(payload)
+                return { status: 416, payload }
             }
         }
+
+        res.status(400).send("Error when initializing script.")
         return { status: 400, message: "Error when initializing script."}
     }
 
@@ -104,7 +113,7 @@ class payloadHandler {
     }
 
     runShellCommand(command) {
-        shell.exec(`${this.cd}; ${command}`)
+        shell.exec(`cd ./${this.repository}; ${command}`)
     }
 
 

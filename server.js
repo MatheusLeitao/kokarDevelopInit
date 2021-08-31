@@ -15,8 +15,11 @@ const requestedUrl = process.argv.slice(2)[0]
 const port = process.argv.slice(2)[1]
 
 if(requestedUrl && !(parseRequestedArgument(requestedUrl))){
-    throw new Error(`\x1b[41mCouldn't find url. Try to run it again with url param.\x1b[0m
-        `)
+    console.error(`\x1b[41mPlease, insert a valid github repository url.\x1b[0m\n`)
+    console.error(`Expected: \x1b[4mhttps://github.com/{repository_creator}/{repository_name}.git\x1b[0m`)
+    console.error(`Got: ${requestedUrl} \n`)
+
+    throw new Error(`\x1b[41mCouldn't find url. Try to run it again with url param.\x1b[0m`)
 }
 
 const payloadhandler = new handleRequest.payloadHandler(requestedUrl)
@@ -25,9 +28,13 @@ app.use(bodyPaser.json())
 
 app.post('/', async (req, res) => {
 
-    let response = await payloadhandler.onLoadMessage(req.body)
-    res.status(response.status).send(response)
-    
+    let response = await payloadhandler.onLoadMessage(req, res)
+    try {
+        res.status(response.status).send(response)
+    } catch (error) {
+        console.log("Answer already sent to emmiter.")
+    }
+
 })
 
 
