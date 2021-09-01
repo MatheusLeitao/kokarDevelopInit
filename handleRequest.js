@@ -20,7 +20,7 @@ class payloadHandler {
 
         const request = req.body
 
-        this.branch = request.ref.split("/")[2]
+        this.q = request.ref.split("/")[2]
 
         var Information = [
             { data: "Requested Branch", info: this.branch },

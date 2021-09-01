@@ -2,6 +2,7 @@
 const express = require('express')
 const bodyPaser = require('body-parser')
 const handleRequest = require('./handleRequest')
+const moment = require('moment')
 
 const app = express()
 
@@ -28,12 +29,15 @@ app.use(bodyPaser.json())
 
 app.post('/', async (req, res) => {
 
+    console.log(`\x1b[33m${moment().format('hh:mm:ss')} INITIALIZING NEW REQUEST #`)
+    
     let response = await payloadhandler.onLoadMessage(req, res)
     try {
         res.status(response.status).send(response)
     } catch (error) {
         console.log("Answer already sent to emmiter.")
     }
+    console.log(`\x1b[33m${moment().format('hh:mm:ss')} REQUEST FINISHED  ##`)
 
 })
 
