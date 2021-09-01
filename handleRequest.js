@@ -20,7 +20,7 @@ class payloadHandler {
 
         const request = req.body
 
-        this.q = request.ref.split("/")[2]
+        this.branch = request.ref.split("/")[2]
 
         var Information = [
             { data: "Requested Branch", info: this.branch },
@@ -29,9 +29,6 @@ class payloadHandler {
             // { data: "Commit url", info: request.compare},
         ];
 
-        console.table(Information);
-        console.log(`\nFor review porpuse, access the link below:`)
-        console.log(`${request.compare}\n`);
 
         if (this.checkRepositoryPayload(request.repository.name) && this.checkRepositoryABranch(this.branch)){
             let colors = { yellow:'\x1b[33m', green: '\x1b[32m', red: '\x1b[31m', reset: '\x1b[0m' }
@@ -75,7 +72,7 @@ class payloadHandler {
         } else {
             console.log("Seems it... it didn't work? hmm..🤔\nEither repository is wrong or branch is wrong..")
 
-            if(this.checkRepositoryABranch(this.branch)){
+            if(!this.checkRepositoryABranch(this.branch)){
                 let payload = {
                     message: "Branch doesn't match the required one",
                     branches: {
@@ -83,10 +80,11 @@ class payloadHandler {
                         got: this.branch
                     }
                 }
-                res.status(415).send(payload)
-                return { status: 415, payload }
+                res.status(417).send(payload)
+                return { status: 417, payload }
             }
-            if(this.checkRepositoryPayload(request.repository.name)){
+
+            if(!this.checkRepositoryPayload(request.repository.name)){
                 let payload = {
                     message: "Repository doesn't match the required one",
                     repository: {
@@ -95,8 +93,8 @@ class payloadHandler {
                     }
                 }
 
-                res.status(416).send(payload)
-                return { status: 416, payload }
+                res.status(417).send(payload)
+                return { status: 417, payload }
             }
         }
 
