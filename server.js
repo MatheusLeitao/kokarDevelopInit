@@ -37,7 +37,7 @@ app.post('/', async (req, res) => {
     } catch (error) {
         console.log("Answer already sent to emmiter.")
     }
-    
+
     console.log(`\x1b[33m${moment().format('hh:mm:ss')} REQUEST FINISHED  ##\x1b[0m`)
 
 })
@@ -48,7 +48,6 @@ const server = app.listen(port || 3000, () => {
     console.log(`Server is listening at: ${server.address().port}`)
     console.log("###############################################")
 })
-
 
 
 
