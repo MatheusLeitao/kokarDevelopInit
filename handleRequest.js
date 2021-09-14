@@ -29,6 +29,9 @@ class payloadHandler {
             // { data: "Commit url", info: request.compare},
         ];
 
+        console.table(Information);
+        console.log(`\nFor review porpuse, access the link below:`)
+        console.log(`${request.compare}\n`);
 
         if (this.checkRepositoryPayload(request.repository.name) && this.checkRepositoryABranch(this.branch)){
             let colors = { yellow:'\x1b[33m', green: '\x1b[32m', red: '\x1b[31m', reset: '\x1b[0m' }
@@ -59,7 +62,7 @@ class payloadHandler {
 
                     return { status: 200, message: "Script execution finished successfully" }
                 }else{
-                    console.log(`${colors.red}Not found.${colors.reset}`)
+                    console.log(`${colors.red}Not rfound.${colors.reset}`)
                     shell.exec(`./kokarDevelopInit/handleServices.sh ${this.repository} ${this.branch}`)
                     return { status: 200, message: "Script execution finished successfully" }
                 }
