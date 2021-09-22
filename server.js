@@ -25,7 +25,7 @@ if(requestedUrl && !(parseRequestedArgument(requestedUrl))){
 
 const payloadhandler = new handleRequest.payloadHandler(requestedUrl)
 
-app.use(bodyPaser.json())
+app.use(bodyPaser.json({limit: '50mb'}))
 
 app.post('/', async (req, res) => {
 
