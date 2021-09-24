@@ -22,7 +22,7 @@ git checkout $BRANCH
 git pull
 
 docker container stop $(docker container ls -aq)
-docker-compose up --build
+docker-compose up -d --build
 
 ####
 
