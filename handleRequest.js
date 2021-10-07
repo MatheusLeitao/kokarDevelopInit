@@ -37,16 +37,13 @@ class payloadHandler {
             let colors = { yellow:'\x1b[33m', green: '\x1b[32m', red: '\x1b[31m', reset: '\x1b[0m' }
             try{
 
-                console.log(`${colors.yellow}Checking for init.yaml${colors.reset}`);
-                if (fs.existsSync(this.yaml)){
-                    console.log(`${colors.green}init.yaml found.${colors.reset}`);
+                this.checkGitChanges(colors)
 
-                    console.log(`${colors.yellow}CHECKING OUT FOR "development" BRANCH${colors.reset}`)
-                    this.runShellCommand(`git checkout development`)
-                    console.log(`${colors.yellow}CURRENT BRANCH BELLOW${colors.reset}`)
-                    this.runShellCommand(`git branch`)
-                    console.log(`${colors.yellow}PULLING CODE FROM REMOTE REPOSITORY${colors.reset}`)
-                    this.runShellCommand(`git pull`)
+                console.log(`${colors.yellow}Checking for init.yaml${colors.reset}`);
+                
+                if (fs.existsSync(this.yaml) || fs.existsSync('./.kokar/init.yaml')){
+
+                    console.log(`${colors.green}init.yaml found.${colors.reset}`);
 
                     res.status(200).send("Script execution started successfully")
 
@@ -62,12 +59,12 @@ class payloadHandler {
 
                     return { status: 200, message: "Script execution finished successfully" }
                 }else{
-                    console.log(`${colors.red}Not rfound.${colors.reset}`)
+                    console.log(`${colors.red}No .kokar/init.yaml found.${colors.reset}`)
                     shell.exec(`./kokarDevelopInit/handleServices.sh ${this.repository} ${this.branch}`)
                     return { status: 200, message: "Script execution finished successfully" }
                 }
             }catch(err){
-                shell.exec(`./kokarDevelopInit/handleServices.sh ${this.repository} ${this.branch}`)
+                // shell.exec(`./kokarDevelopInit/handleServices.sh ${this.repository} ${this.branch}`)
                 res.status(200).send("Script execution finished successfully without yaml file.")
                 return { status: 200, message: "Script execution finished successfully" }
             }
@@ -115,6 +112,16 @@ class payloadHandler {
 
     runShellCommand(command) {
         shell.exec(`cd ./${this.repository}; ${command}`)
+    }
+
+    checkGitChanges(colors){
+
+        console.log(`${colors.yellow}CHECKING OUT FOR "development" BRANCH${colors.reset}`)
+        this.runShellCommand(`git checkout development`)
+        console.log(`${colors.yellow}CURRENT BRANCH BELLOW${colors.reset}`)
+        this.runShellCommand(`git branch`)
+        console.log(`${colors.yellow}PULLING CODE FROM REMOTE REPOSITORY${colors.reset}`)
+        this.runShellCommand(`git pull`)
     }
 
 
